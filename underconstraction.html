@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NineSFT - Coming Soon</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style> 
+
+        :root {
+            --primary-color: #34495e; 
+            --secondary-color: #f39c12; 
+            --text-color: #ecf0f1; 
+            --bg-light: #5dade2; 
+            --bg-dark: #2c3e50; 
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(to bottom, var(--bg-light), var(--bg-dark));
+            color: var(--text-color);
+            overflow: hidden; 
+            position: relative;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            z-index: 1; 
+        }
+
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+ 
+        .crane {
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            width: 80px;
+            height: 150px;
+            background-color: #e74c3c;
+            /* Red */
+            border-radius: 5px 5px 0 0;
+            transform-origin: bottom center;
+            animation: sway 8s ease-in-out infinite alternate;
+        }
+
+        .crane::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 30px;
+            background-color: #c0392b; 
+        }
+
+        .crane::after {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 10px;
+            background-color: #c0392b; 
+            border-radius: 5px;
+        }
+
+        @keyframes sway {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(5deg);
+            }
+        }
+
+        /* Building Outline */
+        .building-outline {
+            position: absolute;
+            bottom: 0;
+            right: 15%;
+            width: 150px;
+            height: 200px;
+            border: 3px solid rgba(255, 255, 255, 0.3); 
+            border-radius: 5px 5px 0 0;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            animation: pulseBuilding 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseBuilding {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.02);
+                opacity: 1;
+            }
+        }
+
+        /* Sun */
+        .sun {
+            position: absolute;
+            top: 10%;
+            right: 10%;
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #fcd000, #f8b400); 
+            border-radius: 50%;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            animation: rotateSun 30s linear infinite;
+        }
+
+        @keyframes rotateSun {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Clouds */
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6); 
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            animation: moveCloud 20s linear infinite;
+        }
+
+        .cloud-1 {
+            width: 120px;
+            height: 70px;
+            top: 20%;
+            left: -5%;
+            transform: scaleX(1.2);
+            animation-duration: 25s;
+            animation-delay: -5s; 
+        }
+
+        .cloud-2 {
+            width: 100px;
+            height: 60px;
+            top: 30%;
+            right: -5%;
+            transform: scaleX(0.9);
+            animation-duration: 20s;
+            animation-delay: -10s; 
+        }
+
+        @keyframes moveCloud {
+            0% {
+                transform: translateX(-100vw);
+            }
+
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+
+
+        .content {
+            background-color: rgba(0, 0, 0, 0.6); 
+            padding: 40px 60px;
+            border-radius: 10px;
+            backdrop-filter: blur(5px); 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            margin: 20px;
+            position: relative;
+            z-index: 2; 
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            font-weight: 300;
+        }
+
+        p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: var(--text-color);
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-item span:first-child {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--secondary-color);
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .countdown-item span:last-child {
+            font-size: 0.9em;
+            text-transform: uppercase;
+            color: var(--text-color);
+            margin-top: 5px;
+        }
+
+        .contact-info {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .contact-info a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            h2 {
+                font-size: 1.4em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .countdown {
+                gap: 15px;
+            }
+
+            .countdown-item span:first-child {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 30px 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            h2 {
+                font-size: 1.2em;
+            }
+
+            p {
+                font-size: 0.9em;
+            }
+
+            .countdown {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .countdown-item {
+                margin-bottom: 15px;
+            }
+
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="background-animation">
+            <div class="crane"></div>
+            <div class="building-outline"></div>
+            <div class="sun"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+        </div>
+        <div class="content">
+            <h1>NineSFT</h1>
+            <h2>Our new website is under construction.</h2>
+            <p>We're laying the foundations for something great. Stay tuned for innovative solutions and quality
+                craftsmanship in the construction industry.</p>
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span id="days"></span>
+                    <span>Days</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours"></span>
+                    <span>Hours</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes"></span>
+                    <span>Minutes</span>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds"></span>
+                    <span>Seconds</span>
+                </div>
+            </div>
+            <p class="contact-info">For urgent inquiries, please email us at <a
+                    href="mailto:support@ninesft.com">support@ninesft.com</a></p>
+        </div>
+    </div>
+
+    <script>
+        // Set the launch date (e.g., 30 days from now)
+        const launchDate = new Date();
+        launchDate.setDate(launchDate.getDate() + 30); // Set to 30 days from now
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = launchDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").textContent = days < 10 ? '0' + days : days;
+            document.getElementById("hours").textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById("minutes").textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("seconds").textContent = seconds < 10 ? '0' + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector(".countdown").innerHTML = "<span>We are live!</span>";
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Initial call to display immediately
+    </script>
+</body>
+
+</html>
